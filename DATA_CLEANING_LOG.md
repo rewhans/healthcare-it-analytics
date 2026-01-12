@@ -9,8 +9,8 @@ Each entry answers one or more of the following:
 - What could break if new data arrives?
 ---
 ## Entry 1
-- ### Date: 1/07/2026
-- ### Dataset: CLEANED--HRSA_MUA--State Level_Export_Statewide_2024
+### Date: 1/07/2026
+### Dataset: CLEANED--HRSA_MUA--State Level_Export_Statewide_2024
 - **Issue discovered:**
   - `service_area_name` uses inconsistent casing (mixed title case and all caps).
 - **Why it matters:**
@@ -21,30 +21,27 @@ Each entry answers one or more of the following:
   - Whether casing inconsistencies appear in other HRSA exports and should be handled programmatically rather than manually.
 ---
 ## Entry 2
-  Date: 
-    1/09/2026
-  Dataset: 
-    CLEANED--HRSA_MUA--County Level_Export_IredellPeers_2024
-  What boundary did I enforce?
-    State-level and county-level HRSA datasets are treated as analytically separate despite sharing identical schemas
-  What assumption did I lock in?
-    Geographic granularity (state vs county) determines valid comparisons, regardless of structural similarity.
-  What decision did I make that future-me might forget?
-    I intentionally prohibited cross-level joins or comparisons to avoid semantic misuse of shared fields.
-  What could break if new data arrives?
-    If future datasets blur geographic levels or introduce mixed-granularity records, joins and aggregations could silently misrepresent service coverage or designation status.
+### Date: 1/09/2026
+#### **Dataset:** CLEANED--HRSA\_MUA--County Level\_Export\_IredellPeers\_2024
+- **What boundary did I enforce?**
+    - State-level and county-level HRSA datasets are treated as analytically separate despite sharing identical schemas
+- **What assumption did I lock in?**
+    - Geographic granularity (state vs county) determines valid comparisons, regardless of structural similarity.
+- **What decision did I make that future-me might forget?**
+    - I intentionally prohibited cross-level joins or comparisons to avoid semantic misuse of shared fields.
+- **What _could_ break if new data arrives?**
+    - If future datasets blur geographic levels or introduce mixed-granularity records, joins and aggregations could silently misrepresent service coverage or designation status.
 ---
 ## Entry 3
-  Date: 
-    1/12/2026
-  Dataset: 
-    CDC PLACES – City/Town Level (2023–2024)
-  Decision surfaced: 
-    Filtered records to North Carolina using exact matches on `StateAbbr == "NC"` or `StateDesc == "north carolina"`.
-  Why it mattered: 
-    This filter determines the geographic scope of all downstream analysis and assumes state identifiers are clean and consistent.
-  What alternative I did not choose: 
-    Using FIPS codes or a reference table to enforce state membership more defensibly.
-  Open question / risk: 
-    If future data includes variations (e.g., trailing spaces, abbreviations beyond "NC", or mixed encodings), relevant records could be silently excluded.
+### Date: 1/12/2026
+#### **Dataset:** CDC PLACES – City/Town Level (2023–2024)
+- **Decision surfaced:** 
+    - Filtered records to North Carolina using exact matches on \`StateAbbr == "NC"\` or \`StateDesc == "north carolina"\`.
+- **Why it mattered:** 
+    - This filter determines the geographic scope of all downstream analysis and assumes state identifiers are clean and consistent.
+- **What alternative I did not choose:** 
+    - Using FIPS codes or a reference table to enforce state membership more defensibly.
+- **Open question / risk:** 
+    - If future data includes variations (e.g., trailing spaces, abbreviations beyond "NC", or mixed encodings), relevant records could be silently excluded.
+---
 
