@@ -1,25 +1,26 @@
-DATA_CLEANING_LOG
-  Each entry just answers one of these questions:
-  What boundary did I enforce?
-  What assumption did I lock in?
-  What decision did I make that future-me might forget?
-  What could break if new data arrives?
+# DATA_CLEANING_LOG
+
+This log documents decisions, assumptions, and risks encountered while preparing real-world healthcare datasets for analysis. The goal is traceability of judgment, not polish.
+
+Each entry answers one or more of the following:
+- What boundary did I enforce?
+- What assumption did I lock in?
+- What decision did I make that future-me might forget?
+- What could break if new data arrives?
 ---
-Entry 1
-  Date: 
-    1/07/2026
-  Dataset: 
-    CLEANED--HRSA_MUA--State Level_Export_Statewide_2024
-  Issue discovered: 
-    `service_area_name` uses inconsistent casing (mixed title case and all caps).
-  Why it matters: 
-    Inconsistent text formatting can cause grouping issues and visual noise in downstream summaries; also signals inconsistent upstream standards.
-  What I did: 
-    Standardized casing using a helper column to enforce uniform formatting.
-  Still unclear: 
-    Whether casing inconsistencies appear in other HRSA exports and should be handled programmatically rather than manually.
+## Entry 1
+- ### Date: 1/07/2026
+- ### Dataset: CLEANED--HRSA_MUA--State Level_Export_Statewide_2024
+- **Issue discovered:**
+  - `service_area_name` uses inconsistent casing (mixed title case and all caps).
+- **Why it matters:**
+  - Inconsistent text formatting can cause grouping issues and visual noise in downstream summaries; also signals inconsistent upstream standards.
+- **What I did:**
+  - Standardized casing using a helper column to enforce uniform formatting.
+- **Still unclear:**
+  - Whether casing inconsistencies appear in other HRSA exports and should be handled programmatically rather than manually.
 ---
-Entry 2
+## Entry 2
   Date: 
     1/09/2026
   Dataset: 
@@ -33,7 +34,7 @@ Entry 2
   What could break if new data arrives?
     If future datasets blur geographic levels or introduce mixed-granularity records, joins and aggregations could silently misrepresent service coverage or designation status.
 ---
-Entry 3
+## Entry 3
   Date: 
     1/12/2026
   Dataset: 
